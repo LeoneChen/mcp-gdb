@@ -1,13 +1,12 @@
 #!/usr/bin/env node
-import { Server } from '@modelcontextprotocol/sdk';
-import { StdioServerTransport } from '@modelcontextprotocol/sdk';
+import { Server } from '@modelcontextprotocol/sdk/server/index.js';
+import { StdioServerTransport } from '@modelcontextprotocol/sdk/server/stdio.js';
 import {
   CallToolRequestSchema,
   ErrorCode,
   ListToolsRequestSchema,
-  McpError,
-  RequestMessage
-} from '@modelcontextprotocol/sdk';
+  McpError
+} from '@modelcontextprotocol/sdk/types.js';
 import { spawn, ChildProcess } from 'child_process';
 import * as readline from 'readline';
 import * as fs from 'fs';
@@ -545,11 +544,12 @@ class GdbServer {
         ]
       };
     } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error);
       return {
         content: [
           {
             type: 'text',
-            text: `Failed to load program: ${error.message}`
+            text: `Failed to load program: ${errorMessage}`
           }
         ],
         isError: true
@@ -586,11 +586,12 @@ class GdbServer {
         ]
       };
     } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error);
       return {
         content: [
           {
             type: 'text',
-            text: `Failed to execute command: ${error.message}`
+            text: `Failed to execute command: ${errorMessage}`
           }
         ],
         isError: true
@@ -625,11 +626,12 @@ class GdbServer {
         ]
       };
     } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error);
       return {
         content: [
           {
             type: 'text',
-            text: `Failed to terminate GDB session: ${error.message}`
+            text: `Failed to terminate GDB session: ${errorMessage}`
           }
         ],
         isError: true
@@ -683,11 +685,12 @@ class GdbServer {
         ]
       };
     } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error);
       return {
         content: [
           {
             type: 'text',
-            text: `Failed to attach to process: ${error.message}`
+            text: `Failed to attach to process: ${errorMessage}`
           }
         ],
         isError: true
@@ -731,11 +734,12 @@ class GdbServer {
         ]
       };
     } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error);
       return {
         content: [
           {
             type: 'text',
-            text: `Failed to load core file: ${error.message}`
+            text: `Failed to load core file: ${errorMessage}`
           }
         ],
         isError: true
@@ -786,11 +790,12 @@ class GdbServer {
         ]
       };
     } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error);
       return {
         content: [
           {
             type: 'text',
-            text: `Failed to set breakpoint: ${error.message}`
+            text: `Failed to set breakpoint: ${errorMessage}`
           }
         ],
         isError: true
@@ -827,11 +832,12 @@ class GdbServer {
         ]
       };
     } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error);
       return {
         content: [
           {
             type: 'text',
-            text: `Failed to continue execution: ${error.message}`
+            text: `Failed to continue execution: ${errorMessage}`
           }
         ],
         isError: true
@@ -870,11 +876,12 @@ class GdbServer {
         ]
       };
     } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error);
       return {
         content: [
           {
             type: 'text',
-            text: `Failed to step: ${error.message}`
+            text: `Failed to step: ${errorMessage}`
           }
         ],
         isError: true
@@ -913,11 +920,12 @@ class GdbServer {
         ]
       };
     } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error);
       return {
         content: [
           {
             type: 'text',
-            text: `Failed to step over: ${error.message}`
+            text: `Failed to step over: ${errorMessage}`
           }
         ],
         isError: true
@@ -954,11 +962,12 @@ class GdbServer {
         ]
       };
     } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error);
       return {
         content: [
           {
             type: 'text',
-            text: `Failed to finish function: ${error.message}`
+            text: `Failed to finish function: ${errorMessage}`
           }
         ],
         isError: true
@@ -1001,11 +1010,12 @@ class GdbServer {
         ]
       };
     } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error);
       return {
         content: [
           {
             type: 'text',
-            text: `Failed to get backtrace: ${error.message}`
+            text: `Failed to get backtrace: ${errorMessage}`
           }
         ],
         isError: true
@@ -1042,11 +1052,12 @@ class GdbServer {
         ]
       };
     } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error);
       return {
         content: [
           {
             type: 'text',
-            text: `Failed to print expression: ${error.message}`
+            text: `Failed to print expression: ${errorMessage}`
           }
         ],
         isError: true
@@ -1085,11 +1096,12 @@ class GdbServer {
         ]
       };
     } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error);
       return {
         content: [
           {
             type: 'text',
-            text: `Failed to examine memory: ${error.message}`
+            text: `Failed to examine memory: ${errorMessage}`
           }
         ],
         isError: true
@@ -1127,12 +1139,13 @@ class GdbServer {
           }
         ]
       };
-    } catch (error: any) {
+    } catch (error) {
+      const errorMessage = error instanceof Error ? error.message : String(error);
       return {
         content: [
           {
             type: 'text',
-            text: `Failed to get register info: ${error.message}`
+            text: `Failed to get register info: ${errorMessage}`
           }
         ],
         isError: true
