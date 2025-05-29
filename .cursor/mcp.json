@@ -1,0 +1,11 @@
+{
+    "mcpServers": {
+        "mcp-gdb": {
+            "command": "node",
+            "args": [
+                "/home/leone/mcp-gdb/build/index.js"
+            ],
+            "disabled": false
+        }
+    }
+}
